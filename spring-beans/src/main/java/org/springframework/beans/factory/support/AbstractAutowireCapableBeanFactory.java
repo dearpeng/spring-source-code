@@ -586,7 +586,8 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 				logger.trace("Eagerly caching bean '" + beanName +
 						"' to allow for resolving potential circular references");
 			}
-			// 这里方法的第二个参数是个函数式接口,其实是个ObjectFactory,当调用ObjectFactory.getObject的时候就会执行到这个方法getEarlyBeanReference()
+			// 这里方法的第二个参数是个函数式接口,其实是个ObjectFactory,当调用ObjectFactory.getObject的时候就会执行到这个方法getEarlyBeanReference().
+			// 这里的getEarlyBeanReference()方法其实是在doGetBean调用getSingleton(String,boolean)的时候会被调用
 			addSingletonFactory(beanName, () -> getEarlyBeanReference(beanName, mbd, bean));
 		}
 
