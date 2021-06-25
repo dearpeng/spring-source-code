@@ -223,7 +223,8 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 					this.suppressedExceptions = new LinkedHashSet<>();
 				}
 				try {
-					// 这里会给earlySingletonObjects 这个二级缓存添加当前beanName
+					// 这里会给earlySingletonObjects 这个二级缓存添加当前beanName,这里调用getObject会执行到getSingleton参数中
+					// 函数式接口createBean方法.
 					singletonObject = singletonFactory.getObject();
 					newSingleton = true;
 				}

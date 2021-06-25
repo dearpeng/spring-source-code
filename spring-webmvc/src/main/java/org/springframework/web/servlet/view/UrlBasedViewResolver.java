@@ -527,7 +527,9 @@ public class UrlBasedViewResolver extends AbstractCachingViewResolver implements
 	 */
 	@Override
 	protected View loadView(String viewName, Locale locale) throws Exception {
+		// org.springframework.web.servlet.view.UrlBasedViewResolver.buildView创建一个视图,并且设置视图的一些属性
 		AbstractUrlBasedView view = buildView(viewName);
+		// 执行生命周期方法
 		View result = applyLifecycleMethods(viewName, view);
 		return (view.checkResource(locale) ? result : null);
 	}

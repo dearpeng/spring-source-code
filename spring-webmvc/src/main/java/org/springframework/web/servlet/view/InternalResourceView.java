@@ -131,8 +131,8 @@ public class InternalResourceView extends AbstractUrlBasedView {
 
 
 	/**
-	 * Render the internal resource given the specified model.
-	 * This includes setting the model as request attributes.
+	 * Render the internal resource given the specified model.使用给定的model渲染内部资源
+	 * This includes setting the model as request attributes.包括将model设置给request属性,这样就能使用表达式获取到model数据
 	 */
 	@Override
 	protected void renderMergedOutputModel(
@@ -168,6 +168,7 @@ public class InternalResourceView extends AbstractUrlBasedView {
 			if (logger.isDebugEnabled()) {
 				logger.debug("Forwarding to [" + getUrl() + "]");
 			}
+			// 呈现视图给客户
 			rd.forward(request, response);
 		}
 	}

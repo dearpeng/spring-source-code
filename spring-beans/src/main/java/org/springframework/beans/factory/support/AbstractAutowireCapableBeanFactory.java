@@ -1813,6 +1813,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 			// 在Bean初始化前处理BeanPostProcessor.
 			// !mbd.isSynthetic()表示用户自定义而非框架所有.
 			// 这里又执行 部分 Aware及其子类的一些方法
+			// 这里会执行@postConstruct注解,初始化前执行代码
 			wrappedBean = applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName);
 		}
 
@@ -1826,6 +1827,7 @@ public abstract class AbstractAutowireCapableBeanFactory extends AbstractBeanFac
 					beanName, "Invocation of init method failed", ex);
 		}
 		if (mbd == null || !mbd.isSynthetic()) {
+			// 这里会完成aop动态代理
 			wrappedBean = applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName);
 		}
 

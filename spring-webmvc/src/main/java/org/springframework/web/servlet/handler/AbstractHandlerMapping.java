@@ -390,6 +390,10 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 	@Override
 	@Nullable
 	public final HandlerExecutionChain getHandler(HttpServletRequest request) throws Exception {
+		// 获取回来是一个HanderMethod,里面就是我们请求的controller中的那个方法
+		/**
+		 * 例如:public void com.cgw360.cls.controllers.MyTasksController.searchProcessedTasks(javax.servlet.http.HttpServletResponse,javax.servlet.http.HttpServletRequest,int,int,java.lang.String,java.lang.Long,java.lang.String,java.lang.String,java.lang.String,java.lang.Boolean,java.lang.String,java.lang.String,java.lang.String) throws java.lang.Exception
+		 */
 		Object handler = getHandlerInternal(request);
 		if (handler == null) {
 			handler = getDefaultHandler();
@@ -465,6 +469,7 @@ public abstract class AbstractHandlerMapping extends WebApplicationObjectSupport
 		HandlerExecutionChain chain = (handler instanceof HandlerExecutionChain ?
 				(HandlerExecutionChain) handler : new HandlerExecutionChain(handler));
 
+		// 这边就是我们请求的url,比如mytasks/search
 		String lookupPath = this.urlPathHelper.getLookupPathForRequest(request, LOOKUP_PATH);
 		for (HandlerInterceptor interceptor : this.adaptedInterceptors) {
 			if (interceptor instanceof MappedInterceptor) {
